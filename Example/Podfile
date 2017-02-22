@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'EFImageLoader_Example' do
+  pod 'EFImageLoader', :path => '../'
+
+  target 'EFImageLoader_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase'
+  end
+end
