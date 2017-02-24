@@ -7,12 +7,9 @@
 //
 
 import UIKit
-import EFImageLoader
 
-class ViewController: UIViewController {
-    
-    var loader:EFImageLoader?
-    
+class ViewController: UIViewController, LoaderProtocol {
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //loader = EFImageLoader(view: self.view, imagesFrames: [], animationDuration: 0.9)
@@ -27,28 +24,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showLoader(_ sender: Any) {
-        loader?.loadingImages = (0...29).map { UIImage(named: "loading_000\($0)")! }
-        loader?.startAnimation()
-        self.stopLoader()
+        
+//        loader?.loadingImages = (0...29).map { UIImage(named: "loading_000\($0)")! }
+//        loader?.startAnimation()
+//        self.stopLoader()
     }
     
     @IBAction func showMario(_ sender: Any) {
-        
-        EFImageLoader(view: self.view, imagesFrames: (1...17).map { UIImage(named: "mario\($0)")! } , backgroundAlpha: 0.2, animationDuration: 2)
-            
-            .startAnimation()
-        
-        self.stopLoader()
+        let options = LoaderOptions(imagesFrames: (1...10).map { UIImage(named: "number\($0)")!}, backgroundAlpha: 0.2, animationDuration: 0.9)
     }
-    
-    func stopLoader() {
-        
-        let when = DispatchTime.now() + 2
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            self.loader?.stopAnimating()
-        }
-        
-    }
-    
 }
 
