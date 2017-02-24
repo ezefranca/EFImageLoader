@@ -1,29 +1,79 @@
 import Foundation
 import UIKit
 
-final class EFImageLoader : UIView {
+extension EFImageLoaderProtocol where Self: UIViewController {
+    
+    public func showImageLoader(_ options: EFImageLoaderOptions) {
+        EFImageLoader(view, options:options)
+        EFImageLoader.shared.startAnimation(uiView: view)
+    }
+    
+    public func showImageLoader() {
+        EFImageLoader.shared.startAnimation(uiView: view)
+    }
+    
+    public func hideImageLoader() {
+        EFImageLoader.shared.stopAnimating(uiView: view)
+    }
+}
+
+
+public protocol EFImageLoaderProtocol : class {
+    func showImageLoader(_ options:EFImageLoaderOptions)
+    func showImageLoader()
+    func hideImageLoader()
+}
+
+public struct EFImageLoaderOptions {
+    
+    var imagesFrames:[UIImage]
+    var backgroundAlpha:CGFloat
+    var animationDuration:TimeInterval
+    var backgroundFadeColor:UIColor
+    
+    public init(imagesFrames:[UIImage], backgroundAlpha:CGFloat, backgroundFadeColor:UIColor, animationDuration:TimeInterval) {
+        self.imagesFrames = imagesFrames
+        self.backgroundAlpha = backgroundAlpha
+        self.backgroundFadeColor = backgroundFadeColor
+        self.animationDuration = animationDuration
+    }
+    
+}
+
+fileprivate var _shared:EFImageLoader!
+
+public class EFImageLoader : UIView {
     
     private static let screenSize: CGRect = UIScreen.main.bounds
     private static let statusSize = UIApplication.shared.statusBarFrame.height
-    
-    static let shared = EFImageLoader()
+   
     
     var imageView:UIImageView
     var baseView:UIView
     var viewBackground:UIView
-    var loadingImages = (0...29).map { UIImage(named: "loading_000\($0)")! }
+    var loadingImages:[UIImage]
     let screenSize: CGRect = UIScreen.main.bounds
     
     var animationDuration:TimeInterval
+    var backgroundAlpha: CGFloat
+    var backgroundFadeColor: UIColor?
     
+    class var shared : EFImageLoader! {
+        if _shared == nil {
+            print("error: shared called before setup")
+        }
+        return _shared
+    }
     
-    init(view: UIView, imagesFrames:[UIImage], backgroundAlpha:CGFloat = 0.2, animationDuration:TimeInterval) {
+    init(_ view: UIView, options: EFImageLoaderOptions) {
         
-        if imagesFrames == nil {
+        if options.imagesFrames == nil {
             fatalError("you need to pass an array of images")
         }
         
-        self.animationDuration = animationDuration
+        self.animationDuration = options.animationDuration
+        self.backgroundAlpha = options.backgroundAlpha
+        self.backgroundFadeColor = options.backgroundFadeColor
         
         self.viewBackground = UIView(frame: CGRect(x: 0, y: -EFImageLoader.statusSize, width: EFImageLoader.screenSize.width, height: EFImageLoader.screenSize.height + EFImageLoader.statusSize))
         
@@ -32,8 +82,8 @@ final class EFImageLoader : UIView {
         self.imageView = UIImageView(frame: CGRect(x: (baseView.frame.width) - 40, y: (baseView.frame.height) - 40, width: 80, height: 80))
         
         
-        self.loadingImages = imagesFrames
-        self.viewBackground.backgroundColor = UIColor.darkGray
+        self.loadingImages = options.imagesFrames
+        self.viewBackground.backgroundColor = UIColor.black
         self.viewBackground.alpha = backgroundAlpha
         
         self.imageView.animationImages = loadingImages
@@ -44,28 +94,48 @@ final class EFImageLoader : UIView {
         
         self.addSubview(viewBackground)
         self.addSubview(baseView)
+        _shared = self
     }
     
     
     convenience init() {
-        self.init(view:UIView(), imagesFrames:[], backgroundAlpha:0.2, animationDuration:0.9)
+        self.init(UIView(), options: EFImageLoaderOptions(imagesFrames:[], backgroundAlpha:0.2, backgroundFadeColor:UIColor.darkGray ,animationDuration:0.9))
     }
     
-    required  init?(coder aDecoder: NSCoder) {
+    required  public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func startAnimation(uiView: UIView) {
         self.stopAnimating(uiView: uiView)
+        
+        self.stopAnimating(uiView: uiView)
         self.isUserInteractionEnabled = false
-        print(self.loadingImages.count)
-        if self.loadingImages != nil {
-            baseView.addSubview(imageView)
-            self.addSubview(viewBackground)
-            self.addSubview(baseView)
-            imageView.startAnimating()
-        }
+        
+        //viewBackground = UIView(frame: CGRect(x: 0, y: -20, width: screenSize.width, height: screenSize.height + 20))
+        
+        //viewBackground?.backgroundColor = UIColor.black
+        viewBackground.alpha = self.backgroundAlpha
+        viewBackground.backgroundColor = self.backgroundFadeColor
+        imageView.animationImages = self.loadingImages
+        imageView.animationDuration = self.animationDuration
+        
+        baseView.addSubview(imageView)
+        uiView.addSubview(viewBackground)
+        uiView.addSubview(baseView)
+        
+        imageView.startAnimating()
+//        self.isUserInteractionEnabled = false
+//        print(self.loadingImages.count)
+//        if self.loadingImages != nil {
+//            baseView.addSubview(imageView)
+//            self.addSubview(viewBackground)
+//            self.addSubview(baseView)
+//            imageView.startAnimating()
+//        }
     }
+    
+    
     
     //    func startAnimation(uiView: UIView) {
     //        self.stopAnimating(uiView: uiView)

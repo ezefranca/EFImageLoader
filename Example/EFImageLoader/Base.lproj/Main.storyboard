@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gK3-KT-IVt">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,27 +22,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2LQ-k5-BVf">
-                                <rect key="frame" x="54" y="180" width="270" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2LQ-k5-BVf">
+                                <rect key="frame" x="52" y="180" width="270" height="30"/>
                                 <state key="normal" title="Show Loader"/>
                                 <connections>
                                     <action selector="showLoader:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="NHo-W7-SK1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ibf-3O-K2x">
-                                <rect key="frame" x="54" y="267" width="270" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ibf-3O-K2x">
+                                <rect key="frame" x="52" y="267" width="270" height="30"/>
                                 <state key="normal" title="Show Mario"/>
                                 <connections>
-                                    <action selector="showMario:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="XV5-Ec-ipd"/>
+                                    <action selector="showMario:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="bfr-vW-cfs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AkM-OU-YTr">
+                                <rect key="frame" x="52" y="348" width="270" height="30"/>
+                                <state key="normal" title="Show Numbers"/>
+                                <connections>
+                                    <action selector="showNumbers:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="zSP-HX-eOT"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="2LQ-k5-BVf" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="116" id="3K2-dz-hSR"/>
+                            <constraint firstItem="Ibf-3O-K2x" firstAttribute="trailing" secondItem="AkM-OU-YTr" secondAttribute="trailing" id="9aq-rS-vxy"/>
+                            <constraint firstItem="Ibf-3O-K2x" firstAttribute="top" secondItem="2LQ-k5-BVf" secondAttribute="bottom" constant="57" id="Aus-Iq-WXT"/>
+                            <constraint firstItem="2LQ-k5-BVf" firstAttribute="trailing" secondItem="Ibf-3O-K2x" secondAttribute="trailing" id="BU0-bD-KHf"/>
+                            <constraint firstItem="2LQ-k5-BVf" firstAttribute="leading" secondItem="Ibf-3O-K2x" secondAttribute="leading" id="PMh-r1-su6"/>
+                            <constraint firstItem="2LQ-k5-BVf" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="R13-ZS-0xa"/>
+                            <constraint firstItem="AkM-OU-YTr" firstAttribute="top" secondItem="Ibf-3O-K2x" secondAttribute="bottom" constant="51" id="WiB-JN-S33"/>
+                            <constraint firstItem="2LQ-k5-BVf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="36" id="aWC-Wf-wt0"/>
+                            <constraint firstItem="Ibf-3O-K2x" firstAttribute="leading" secondItem="AkM-OU-YTr" secondAttribute="leading" id="xPf-So-TvJ"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="bQh-cS-mlg">
+                        <barButtonItem key="rightBarButtonItem" title="Stop Loader" id="z2G-mD-STo">
+                            <connections>
+                                <action selector="stopLoader:" destination="vXZ-lx-hvc" id="vKY-ki-mOP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1076" y="138.98050974512745"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HBM-BO-YEt">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gK3-KT-IVt" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XM1-AF-dN9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="kVy-2Y-dgd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mZg-AG-kFB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>

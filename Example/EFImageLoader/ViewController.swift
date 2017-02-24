@@ -7,31 +7,40 @@
 //
 
 import UIKit
+import EFImageLoader
 
-class ViewController: UIViewController, LoaderProtocol {
+class ViewController: UIViewController, EFImageLoaderProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //loader = EFImageLoader(view: self.view, imagesFrames: [], animationDuration: 0.9)
-        
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func stopLoader(_ sender: UIBarButtonItem) {
+        self.hideImageLoader()
     }
     
     @IBAction func showLoader(_ sender: Any) {
         
-//        loader?.loadingImages = (0...29).map { UIImage(named: "loading_000\($0)")! }
-//        loader?.startAnimation()
-//        self.stopLoader()
+        let options = EFImageLoaderOptions(imagesFrames: (1...29).map { UIImage(named: "loading_000\($0)")!}, backgroundAlpha: 0.5, backgroundFadeColor:UIColor.black, animationDuration: 0.9)
+        self.showImageLoader(options)
+
     }
     
     @IBAction func showMario(_ sender: Any) {
-        let options = LoaderOptions(imagesFrames: (1...10).map { UIImage(named: "number\($0)")!}, backgroundAlpha: 0.2, animationDuration: 0.9)
+        
+       let options = EFImageLoaderOptions(imagesFrames: (1...17).map { UIImage(named: "mario\($0)")!}, backgroundAlpha: 0.3, backgroundFadeColor:UIColor.red,  animationDuration: 2.0)
+          self.showImageLoader(options)
+    }
+    
+    @IBAction func showNumbers(_ sender:Any) {
+        
+        let options = EFImageLoaderOptions(imagesFrames: (1...10).map { UIImage(named: "number\($0)")!}, backgroundAlpha: 0.5, backgroundFadeColor:UIColor.green, animationDuration: 2.0)
+        self.showImageLoader(options)
+    
     }
 }
 
