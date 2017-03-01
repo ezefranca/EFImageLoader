@@ -30,10 +30,9 @@ class ViewController: UIViewController, EFImageLoaderProtocol {
 
     }
     
-    @IBAction func showMario(_ sender: Any) {
-        
-       let options = EFImageLoaderOptions(imagesFrames: (1...17).map { UIImage(named: "mario\($0)")!}, backgroundAlpha: 0.3, backgroundFadeColor:UIColor.red,  animationDuration: 2.0)
-          self.showImageLoader(options)
+    @IBAction func showSonic(_ sender: Any) {
+        let options = EFImageLoaderOptions(imagesFrames: (1...8).map { UIImage(named: "sonic\($0)")!}, backgroundAlpha: 0.2, backgroundFadeColor:UIColor.blue,  animationDuration: 0.6)
+        self.showImageLoader(options)
     }
     
     @IBAction func showNumbers(_ sender:Any) {

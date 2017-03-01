@@ -79,6 +79,7 @@ public class EFImageLoader : UIView {
         
         self.baseView = UIView(frame: CGRect(x: EFImageLoader.screenSize.width/4, y: EFImageLoader.screenSize.height/4, width: EFImageLoader.screenSize.width/4, height: EFImageLoader.screenSize.height/4))
         
+        
         self.imageView = UIImageView(frame: CGRect(x: (baseView.frame.width) - 40, y: (baseView.frame.height) - 40, width: 80, height: 80))
         
         

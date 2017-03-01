@@ -31,9 +31,9 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ibf-3O-K2x">
                                 <rect key="frame" x="52" y="267" width="270" height="30"/>
-                                <state key="normal" title="Show Mario"/>
+                                <state key="normal" title="Show Sonic"/>
                                 <connections>
-                                    <action selector="showMario:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="bfr-vW-cfs"/>
+                                    <action selector="showSonic:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fUF-ft-YLp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AkM-OU-YTr">
