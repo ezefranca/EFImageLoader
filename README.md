@@ -5,6 +5,8 @@
 [![License](https://img.shields.io/cocoapods/l/EFImageLoader.svg?style=flat)](http://cocoapods.org/pods/EFImageLoader)
 [![Platform](https://img.shields.io/cocoapods/p/EFImageLoader.svg?style=flat)](http://cocoapods.org/pods/EFImageLoader)
 
+![](https://media.giphy.com/media/kAL2VSG15AXXW/giphy.gif)
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
