@@ -1,23 +1,6 @@
 import Foundation
 import UIKit
 
-extension EFImageLoaderProtocol where Self: UIViewController {
-    
-    public func showImageLoader(_ options: EFImageLoaderOptions) {
-        EFImageLoader(view, options:options)
-        EFImageLoader.shared.startAnimation(uiView: view)
-    }
-    
-    public func showImageLoader() {
-        EFImageLoader.shared.startAnimation(uiView: view)
-    }
-    
-    public func hideImageLoader() {
-        EFImageLoader.shared.stopAnimating(uiView: view)
-    }
-}
-
-
 public protocol EFImageLoaderProtocol : class {
     func showImageLoader(_ options:EFImageLoaderOptions)
     func showImageLoader()
@@ -37,7 +20,22 @@ public struct EFImageLoaderOptions {
         self.backgroundFadeColor = backgroundFadeColor
         self.animationDuration = animationDuration
     }
+}
+
+extension EFImageLoaderProtocol where Self: UIViewController {
     
+    public func showImageLoader(_ options: EFImageLoaderOptions) {
+        _ = EFImageLoader(view, options: options)
+        EFImageLoader.shared.startAnimation(uiView: view)
+    }
+    
+    public func showImageLoader() {
+        EFImageLoader.shared.startAnimation(uiView: view)
+    }
+    
+    public func hideImageLoader() {
+        EFImageLoader.shared.stopAnimating(uiView: view)
+    }
 }
 
 fileprivate var _shared:EFImageLoader!
@@ -46,7 +44,7 @@ public class EFImageLoader : UIView {
     
     private static let screenSize: CGRect = UIScreen.main.bounds
     private static let statusSize = UIApplication.shared.statusBarFrame.height
-   
+    
     
     var imageView:UIImageView
     var baseView:UIView
@@ -61,13 +59,14 @@ public class EFImageLoader : UIView {
     class var shared : EFImageLoader! {
         if _shared == nil {
             print("error: shared called before setup")
+            return nil
         }
         return _shared
     }
     
     init(_ view: UIView, options: EFImageLoaderOptions) {
         
-        if options.imagesFrames == nil {
+        if (options.imagesFrames.indices.Notcontains(0)) {
             fatalError("you need to pass an array of images")
         }
         
@@ -126,6 +125,12 @@ public class EFImageLoader : UIView {
         self.baseView.removeFromSuperview()
         self.viewBackground.removeFromSuperview()
         self.isUserInteractionEnabled = true
+    }
+}
+
+fileprivate extension CountableRange {
+    func Notcontains(_ element: Bound) -> Bool {
+        return !(self.contains(element))
     }
 }
 

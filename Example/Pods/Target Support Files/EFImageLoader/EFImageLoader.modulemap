@@ -1,0 +1,6 @@
+framework module EFImageLoader {
+  umbrella header "EFImageLoader-umbrella.h"
+
+  export *
+  module * { export * }
+}
