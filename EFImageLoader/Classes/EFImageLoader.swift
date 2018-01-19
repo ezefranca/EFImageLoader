@@ -38,7 +38,7 @@ extension EFImageLoaderProtocol where Self: UIViewController {
     }
 }
 
-fileprivate var _shared:EFImageLoader!
+var _shared:EFImageLoader!
 
 public class EFImageLoader : UIView {
     
